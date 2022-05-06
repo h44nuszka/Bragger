@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+    <head>
+        <title>Stwórz swoje portfolio</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+            $('input[type="radio"]').click(function () {
+                if ($(this).attr("value") == "light") {
+                    $(".Box").hide('slow');
+                }
+                if ($(this).attr("value") == "dark") {
+                    $(".Box").hide('slow');
+                }
+                if ($(this).attr("value") == "custom") {
+                    $(".Box").show('slow');
+                }
+            });
+
+            $('input[type="radio"]').trigger('click');  // trigger the event
+        });
+        </script>
+        <script>
+            $(document).ready(function () {
+
+            $('input[type="radio"]').click(function () {
+
+                if ($(this).attr("value") == "1") {
+                    $(".firstPage").show('slow');
+                    $(".secondPage").hide('slow');
+                    $(".thirdPage").hide('slow');
+                    $(".fourthPage").hide('slow');
+                }
+                if ($(this).attr("value") == "2") {
+                    $(".firstPage").show('slow');
+                    $(".secondPage").show('slow');
+                    $(".thirdPage").hide('slow');
+                    $(".fourthPage").hide('slow');
+                }
+               if ($(this).attr("value") == "3") {
+                    $(".firstPage").show('slow');
+                    $(".secondPage").show('slow');
+                    $(".thirdPage").show('slow');
+                    $(".fourthPage").hide('slow');
+                }
+                if ($(this).attr("value") == "4") {
+                    $(".firstPage").show('slow');
+                    $(".secondPage").show('slow');
+                    $(".thirdPage").show('slow');
+                    $(".fourthPage").show('slow');
+                }
+            });
+
+            $('input[type="radio"]').trigger('click');  // trigger the event
+        });
+        </script>
+        {% include 'head.html' %}
+    </head>
+    <body>
+       <div class="fourth-page wrapper">
+           {% include 'header.html' %}
+            <div class="container tlo">
+                <div class="row">
+                    <h2>Do dzieła!</h2>
+                    <p>Jeśli masz jakiekolwiek wątpliwości, udaj się do zakładki <a href="{{ url_for('instructions') }}">"Instrukcje"</a> po więcej informacji!</p>
+                    <form action="{{ url_for('dataForm') }}" method="post" enctype="multipart/form-data">
+                        <!--Name-->
+                        <div class="row">
+                            <details>
+                                <summary><strong>Podaj nazwę swojej strony.</strong></summary>
+                                <h5>To może być Twoje imię i nazwisko, pseudonim artystyczny, cokolwiek, co będzie Twoim znakiem rozpoznawczym.</h5>
+                            </details>
+                                <div class="col">
+                                    <input type="text" class='inputMargin' name="portfolioName" value="Luna" required/>
+                                </div>
+                        </div>
+
+                        <!--Colors-->
+                        <div class="row radioHidden">
+                            <details>
+                                <summary><strong>Wybierz motyw kolorystyczny.</strong></summary>
+                                <h5>Możesz wybrać zarówno jeden z naszych gotowych motywów lub wybrać własne kolory.</h5>
+                            </details>
+                            <div class="col-md-5">
+                                <label>
+                                    <input type="radio" name="colors" id="light" value="light" checked/>
+                                    <img class='img-fluid img-margin' src="static/img/light.png">
+                                </label>
+                            </div>
+                            <div class="col-md-5">
+                                <label>
+                                    <input type="radio" name="colors" id="dark" value="dark"/>
+                                    <img class='img-fluid img-margin' src="static/img/dark.png" >
+                                </label>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="customContainer">
+                                    <input type="radio" name="colors" id="custom" value="custom"/>
+                                    <img class='img-fluid img-margin' src="static/img/custom.png" >
+                                    <div class="custom">Własne</div>
+                                </label>
+                                <div class="Box" style="display:none">
+                                    <div class="row">
+                                        <label>Kolor tła</label>
+                                        <input type="color" name="background" id="background" value="#865555">
+                                    </div>
+                                    <div class="row">
+                                        <label>Kolor tekstu</label>
+                                        <input type="color" name="font" id="font" value="#ECE2E2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Grid style-->
+                        <div class="row radioHidden">
+                            <details>
+                                <summary><strong>Wybierz układ.</strong></summary>
+                                <h5>Obrazy będą wyświetlane w siatce (tzw. grid) w jednym z wybranych układów.</h5>
+                            </details>
+                            <div class="col-md">
+                                <label>
+                                    <input type="radio" name="grid" id="3x2" value="3x2"/>
+                                    <img class='img-fluid img-margin' src="static/img/grid3x2.png">
+                                </label>
+                            </div>
+                            <div class="col-md">
+                                <label>
+                                    <input type="radio" name="grid" id="4x3" value="4x3"/>
+                                    <img class='img-fluid img-margin' src="static/img/grid4x3.png">
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <!--Language-->
+                        <div class="row radioHidden">
+                            <details>
+                                <summary><strong>Wybierz wersję językową.</strong></summary>
+                                <h5>Cała strona będzie dostępna w jednym z dwóch języków. Pamiętaj jednak, że treści, które wpisujesz, będą w takim języku, w jakim je napiszesz!</h5>
+                            </details>
+                            <div class="col-md">
+                                <select class='inputMargin' id="language" name="language">
+                                    <option id="pl" value="pl">Polski</option>
+                                    <option id="en" value="en">Angielski</option>
+                                    <option id="de" value="de">Niemiecki</option>
+                                    <option id="fr" value="fr">Francuski</option>
+                                    <option id="es" value="es">Hiszpański</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--Menu elements-->
+                        <div class="row">
+                            <details>
+                                <summary><strong>Wybierz elementy menu</strong></summary>
+                                <h5>Maksymalnie możesz wybrać 4 elementy menu, czyli cztery podstrony, których treść będziesz uzupełniać w dalszych krokach.
+                                    Dlaczego akurat cztery? Im bardziej minimalistyczna strona, tym przejrzyściej wygląda i lepiej się prezentuje!
+                                    Spróbuj zmieścić swoje treści w tych czterech podstronach.</h5>
+                            </details>
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-md">
+                                        <p>Z ilu elementów ma się składać menu?</p>
+                                        <div class='radioMargin'>
+                                            <label class="radioInput"><input type="radio" name="menuElements" id="1" value="1" checked="checked">
+                                                1
+                                            <span class="checkmark"></span></label>
+                                            <label class="radioInput"><input type="radio" name="menuElements" id="2" value="2">
+                                                2
+                                            <span class="checkmark"></span></label>
+                                            <label class="radioInput"><input type="radio" name="menuElements" id="3" value="3">
+                                                3
+                                            <span class="checkmark"></span></label>
+                                            <label class="radioInput"><input type="radio" name="menuElements" id="4" value="4">
+                                                4
+                                            <span class="checkmark"></span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row firstPage menuForm"  style="display:none">
+                                    <div class="col-md-3">
+                                        <strong>Pierwsza podstrona</strong>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class='inputMargin' name="menuItem1" id="menuItem1" value="Galeria"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Tu nie wpisujesz swojej treści. Na tej podstronie wyświetlać się będą Twoje prace.</p>
+                                    </div>
+                                </div>
+                                <div class="row secondPage menuForm"  style="display:none">
+                                    <div class="col-md-3">
+                                        <strong>Druga podstrona</strong>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class='inputMargin' name="menuItem2" id="menuItem2" value="O mnie"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <textarea name="description2" id="menuItem2desc" class="bigInput">
+                                        {% include 'bigInput.html' %}
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="row thirdPage menuForm"  style="display:none">
+                                    <div class="col-md-3">
+                                            <strong>Trzecia podstrona</strong>
+                                    </div>
+                                    <div class="col-md-3">
+                                            <input type="text" class='inputMargin' name="menuItem3" id="menuItem3" value="Kontakt"/>
+                                     </div>
+                                    <div class="col-md-6">
+                                        <textarea name="description3" id="menuItem3desc" class="bigInput">Kontakt
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="row fourthPage menuForm"  style="display:none">
+                                    <div class="col-md-3">
+                                        <strong>Czwarta podstrona</strong>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class='inputMargin' name="menuItem4" id="menuItem4" value="..."/>
+                                     </div>
+                                    <div class="col-md-6">
+                                        <textarea name="description4" id="menuItem4desc" class="bigInput">...
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <details>
+                                <summary><strong>Wrzuć swoje obrazy - pamiętaj o konwencji nazewniczej!</strong></summary>
+                                <h5>Pamiętaj, że im więcej prac, tym lepiej Twoja strona będzie wyglądała.
+                                    Wybierz minimum sześć prac dla gridu z trzema kolumnami
+                                    i minimum osiem dla gridu z czterema kolumnami!
+                                    Weź też pod uwagę to, ile plików chcesz zawrzeć w portfolio,
+                                a ile kolumn wybrałeś. <br>
+                                    Zachowaj konwencję nazewniczą, aby wyświetlać dobrze sformatowane tytuły prac:<br>
+                                    Mój_Tytuł.png będzie wyświetlał się jako <i>Mój Tytuł</i>.
+                                    <br>
+                                    To znaczy: wielkie litery w nazwie pliku zostaną zachowane, a słowa oddzielone,
+                                    jeśli dasz pomiędzy nie znak "_". <br>
+                                    Więcej szczegółów znajdziesz w zakładce <i>Instrukcja</i></h5>
+                            </details>
+                            <input class='fileButton' type="file" name="image" accept="image/*" multiple required>
+                            <button type="submit" class="btn btn-primary btn-block mb-4">Generuj!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+       </div>
+
+            {% include 'scripts.html' %}
+        <script src="static/js/ckeditor/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace('description2');
+            CKEDITOR.replace('description3');
+            CKEDITOR.replace('description4');
+        </script>
+
+    </body>
+</html>

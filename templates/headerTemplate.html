@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarCenteredExample"
+      aria-controls="navbarCenteredExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-gem fa-lg" style="color: #dadbdc"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarCenteredExample">
+        <a class="navbar-brand">{{ portfolioName }}</a>
+      <!-- Left links -->
+      <ul class="navbar-nav ms-auto my-sm-0">
+        {% if menuElementsQty == 4: %}
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="mainPage.html">{{ menuItems[0] }}</a>
+          </li>
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="secondPage.html">{{ menuItems[1] }}</a>
+          </li>
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="thirdPage.html">{{ menuItems[2] }}</a>
+          </li>
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="fourthPage.html">{{ menuItems[3] }}</a>
+          </li>
+        {% elif menuElementsQty == 3: %}
+          <li class="nav-item me-4">
+            </li>
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="mainPage.html">{{ menuItems[0] }}</a>
+          </li>
+          <li class="nav-item me-4">
+          </li>
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="secondPage.html">{{ menuItems[1] }}</a>
+          </li>
+          <li class="nav-item me-4">
+             <a class="nav-link" aria-current="page" href="thirdPage.html">{{ menuItems[2] }}</a>
+          </li>
+        {% elif menuElementsQty == 2: %}
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="mainPage.html">{{ menuItems[0] }}</a>
+          </li>
+          <li class="nav-item me-4">
+              <a class="nav-link" aria-current="page" href="secondPage.html">{{ menuItems[1] }}</a>
+          </li>
+        {% elif menuElementsQty == 1: %}
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="mainPage.html">{{ menuItems[0] }}</a>
+          </li>
+        {% endif %}
+
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>

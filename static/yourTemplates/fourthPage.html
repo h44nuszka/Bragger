@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="static/css/mdb.min.css" />
+    <title>...</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
+        body{
+    background-color: #865555;
+    color: #ece2e2 ;
+    font-family: 'Montserrat', sans-serif;
+    font-size: large;
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: #865555;
+  background: #ece2e2;
+}
+
+::selection {
+  color: #865555;
+  background: #ece2e2;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+.navbar{
+    box-shadow: none;
+    margin-top: 0%;
+    font-size: 120%;
+}
+
+.navbar-nav{
+    background-color: transparent;
+    }
+
+.nav-link, .navbar-brand{
+    color: #ece2e2 ;
+    max-width: 120%;
+}
+
+.nav-link:hover, .navbar-brand:hover{
+    color: #ece2e2 ;
+}
+
+.img-overlay-container {
+  position: relative;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #865555;
+}
+.img-fluid{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.img-overlay-container:hover .overlay {
+  opacity: 0.5;
+}
+.img-overlay-container:hover .text {
+  opacity: 1;
+}
+
+.text {
+    max-width: inherit;
+    opacity: 0;
+  transition: .5s ease;
+  color: #ece2e2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+.row > .column {
+  padding: 0 8px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  float: left;
+  width: 25%;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mySlides {
+  display: none;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+img {
+  margin-bottom: -4px;
+}
+
+.caption-container {
+  text-align: center;
+  background-color: black;
+  padding: 2px 16px;
+  color: white;
+}
+
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+img.hover-shadow {
+  transition: 0.3s;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+
+.imgRow {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+
+.imgColumn {
+  -ms-flex: 33%; /* IE10 */
+  flex: 33%;
+  max-width: 33%;
+  padding: 0 4px;
+}
+
+
+.imgColumn img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .imgColumn {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .imgColumn {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+    </style>
+</head>
+<body>
+   <div class="container">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarCenteredExample"
+      aria-controls="navbarCenteredExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-gem fa-lg" style="color: #dadbdc"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarCenteredExample">
+        <a class="navbar-brand"></a>
+      <!-- Left links -->
+      <ul class="navbar-nav ms-auto my-sm-0">
+        
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="mainPage.html">Galeria</a>
+          </li>
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="secondPage.html">O mnie</a>
+          </li>
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="thirdPage.html">Kontakt</a>
+          </li>
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="fourthPage.html">...</a>
+          </li>
+        
+
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+            <hr>
+        </div>
+       <div class="row">
+           <div class="col-md-2"></div>
+           <div class="col-md-8">
+           <p>...</p>
+
+           </div>
+           <div class="col-md-2">
+           </div>
+       </div>
+   </div>
+</body>
+</html>

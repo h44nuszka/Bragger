@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ language }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="static/css/mdb.min.css" />
+    <title>{{ menuItems[1] }}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
+        {% include 'styles.css' %}
+    </style>
+</head>
+<body>
+   <div class="container">
+        <div class="row">
+            {% include 'headerTemplate.html' %}
+            <hr>
+        </div>
+       <div class="row">
+           <div class="col-md-2"></div>
+           <div class="col-md-8">
+           {{ siteContent[0]|safe }}
+           </div>
+           <div class="col-md-2">
+           </div>
+       </div>
+   </div>
+</body>
+</html>

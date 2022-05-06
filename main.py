@@ -21,7 +21,7 @@ import glob
 import numpy as np
 from flask_session.__init__ import Session
 
-UPLOAD_FOLDER = 'static/yourTemplates/img'
+UPLOAD_FOLDER = 'static/yourTemplates/static/img'
 DOWNLOAD_FOLDER = 'static/yourTemplates'
 ZIP_DIRECTORY = 'static/zipDirectory'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}

@@ -188,8 +188,10 @@ def createFilesList():
     session['filenames'] = []
     session['names'] = []
     images = request.files.getlist('image')
+    cwd = os.getcwd()
+
     for image in images:
-        image.save(os.path.join(app.config['IMAGE_UPLOADS'], image.filename))
+        image.save(os.path.join(cwd, app.config['IMAGE_UPLOADS'], image.filename))
         session['filenames'].append(image.filename)
 
     session['imageQty'] = len(images)

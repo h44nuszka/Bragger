@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+    <head>
+        <title>Instrukcje</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+            $('input[type="radio"]').click(function () {
+                if ($(this).attr("value") == "light") {
+                    $(".Box").hide('slow');
+                }
+                if ($(this).attr("value") == "dark") {
+                    $(".Box").hide('slow');
+                }
+                if ($(this).attr("value") == "custom") {
+                    $(".Box").show('slow');
+                }
+            });
+
+            $('input[type="radio"]').trigger('click');  // trigger the event
+        });
+        </script>
+        <script>
+            $(document).ready(function () {
+
+            $('input[type="radio"]').click(function () {
+
+                if ($(this).attr("value") == "1") {
+                    $(".firstPage").show('slow');
+                    $(".secondPage").hide('slow');
+                    $(".thirdPage").hide('slow');
+                    $(".fourthPage").hide('slow');
+                }
+                if ($(this).attr("value") == "2") {
+                    $(".firstPage").show('slow');
+                    $(".secondPage").show('slow');
+                    $(".thirdPage").hide('slow');
+                    $(".fourthPage").hide('slow');
+                }
+               if ($(this).attr("value") == "3") {
+                    $(".firstPage").show('slow');
+                    $(".secondPage").show('slow');
+                    $(".thirdPage").show('slow');
+                    $(".fourthPage").hide('slow');
+                }
+                if ($(this).attr("value") == "4") {
+                    $(".firstPage").show('slow');
+                    $(".secondPage").show('slow');
+                    $(".thirdPage").show('slow');
+                    $(".fourthPage").show('slow');
+                }
+            });
+
+            $('input[type="radio"]').trigger('click');  // trigger the event
+        });
+        </script>
+        {% include 'head.html' %}
+    </head>
+    <body>
+       <div class="fourth-page wrapper">
+           {% include 'header.html' %}
+           <div class="container tlo">
+                <div class="row">
+                    <h1 class="instructions-header">Spis treści</h1>
+                    <div class="instructions-list">
+                        <ol>
+                            <li><a href="#form"><p>Formularz</p></a></li>
+                            <li><a href="#preview"><p>Podgląd</p></a></li>
+                            <li><a href="#package"><p>Paczka</p></a></li>
+                        </ol>
+                    </div>
+                    <h1 class="instructions-header" id="form">Zacznij od wypełnienia formularza.</h1>
+                    <h2>W formularzu czekają na Ciebie następujące pola do&nbsp;wypełnienia:</h2>
+                    <div class="instructions-list">
+                        <h3><strong>Nazwa strony</strong></h3>
+                        <p>Nazwa może być Twoim imieniem i&nbsp;nazwiskiem, pseudonimem artystycznym,
+                        frazą, która Cię wyraża. Zadbaj o&nbsp;to, by była krótka i chwytliwa &mdash; to&nbsp;pierwsze, co&nbsp;zobaczy odwiedzający.</p>
+                        <hr>
+
+                        <h3><strong>Motyw kolorystyczny</strong></h3>
+                        <p>Możesz wybrać jeden z&nbsp;moich motywów - jasny lub ciemny - lub&nbsp;też stworzyć własną kompozycję kolorystyczną.
+                        Jeśli decydujesz&nbsp;się na użycie&nbsp;własnych kolorów, pamiętaj, aby&nbsp;tekst był odpowiednio kontrastowy względem tła.
+                            W&nbsp;ten sposób zachowasz czytelność i&nbsp;przejrzystość treści.
+                        </p>
+                        <hr>
+
+                        <h3 id="layout"><strong>Układ strony</strong></h3>
+                        <p>Twoje prace wyświetlane będą w&nbsp;siatce, tzw.&nbsp;gridzie. Możesz wybrać, aby&nbsp;obrazy wyświetlały&nbsp;się w&nbsp;trzech lub&nbsp;czterech kolumnach.
+                        Przy tym wyborze odpowiedz sobie na&nbsp;kilka pytań: <br>
+                        </p>
+                            <ol>
+                            <li> <strong>Ile masz prac?</strong><br> Im więcej, tym&nbsp;lepiej będzie wyglądać strona.
+                                Sześć obrazów to&nbsp;minimum dla&nbsp;trzech kolumn, a&nbsp;osiem prac dla&nbsp;czterech. Poza&nbsp;tym, jeśli
+                                masz mało prac, to&nbsp;lepiej wybrać trzy kolumny - będzie wizualnie wydawało się ich więcej.
+                            </li>
+
+                            <li><strong>Przez jaką liczbę dzieli się liczba Twoich prac?</strong><br> Sprawa jest prosta,
+                                jeśli&nbsp;liczba Twoich prac jest wielokrotnością którejś z&nbsp;liczby kolumn, np.&nbsp;
+                            jeśli masz 9&nbsp;prac (3 razy 3), wybierz grid z&nbsp;trzema kolumnami, a&nbsp;jeśli 8 &mdash; z&nbsp;czterema.
+                            Jeżeli liczba Twoich prac nie jest wielokrotnością trójki albo ósemki, po&nbsp;prostu spróbuj, popatrz, w&nbsp;jakiej konfiguracji portfolio bardziej
+                            Ci się podoba. Jeśli zachowasz te&nbsp;zasady, układ obrazów na Twojej stronie
+                            będzie zbalansowany i&nbsp;ładny.
+                            </li>
+                            </ol>
+
+                        <hr>
+
+                        <h3><strong>Wersja językowa</strong></h3>
+                        <p>Treści, które zamieścisz na&nbsp;stronie, będą oczywiście w&nbsp;takim języku, w&nbsp;jakim je napiszesz. Po&nbsp;co więc wybierać język na &nbsp;tym etapie?
+                        To&nbsp;już temat dla wnikliwych &mdash; przeglądarki obsługują tzw.&nbsp;metadane, a&nbsp;wśród nich język strony. Ułatwia to&nbsp;wyszukiwanie, np.&nbsp;w&nbsp;wyszukiwarce
+                            Google lub Bing. Twoja strona będzie więc widoczna dla odbiorców, którzy&nbsp;posługują się wybranym przez Ciebie językiem (lub dla tych,
+                            którzy szukają stron w&nbsp;podanym języku).
+                        </p>
+                        <hr>
+
+                        <h3><strong>Ilość i treść elementów menu</strong></h3>
+                        <p>Na&nbsp;tym etapie wybierz, ile&nbsp;chcesz stworzyć podstron swojego portfolio. Pierwszą, główną podstroną,
+                            będzie galeria Twoich prac&mdash; jest to&nbsp;obowiązkowa pozycja.
+                        Kolejne podstrony będą zawierać treść pisemną. Użyj edytora tekstu, który pozwala na&nbsp;zaawansowaną edycję i&nbsp;formatowanie.
+                            W&nbsp;ten&nbsp;sposób możesz wybrać, które treści
+                        powinny się wyróżniać, możesz użyć punktorów, pogrubienia, kursywy... Czego tylko chcesz!</p>
+                        <hr>
+
+                        <h3><strong>Wrzucone pliki &mdash; konwencja nazewnicza</strong></h3>
+                        <p>Wrzuć wszystkie swoje prace, które chcesz mieć w&nbsp;portfolio. Pamiętaj o&nbsp;zasadach wymienionych w punkcie <a href="#layout"><i>Układ strony</i></a>.
+                            <br>Dzięki zachowanej konwencji nazewniczej można w łatwy sposób przekazać tytuły swoich prac. <br>
+                            Zasada jest tylko jedna: wstaw znak "_" pomiędzy słowa w tytule. Aplikacja rozdzieli słowa i pokaże sformatowany tytuł pracy.<br>
+                            <strong>Na przykład:</strong><br>
+                            Plik Mój_Tytuł.png będzie wyświetlał się jako Mój Tytuł.
+                        </p>
+                        <hr>
+                    </div>
+                    <center><h2>Skończyłeś? Kliknij <i>Generuj!</i></h2></center>
+                    <br><br>
+                    <h1 class="instructions-header" id="preview">Podgląd</h1>
+                    <div class="instructions-list">
+                        <h3><strong>Sprawdź, czy wszystko gra</strong></h3>
+                        <p>Podgląd od Twojej właściwej strony różni się jedynie elementem u góry strony z trzema przyciskami.
+                        Dlatego właśnie możesz bez obaw poklikać po swojej aplikacji, zobaczyć jak wyglądają podstrony, jak układają się zdjęcia, itd.</p>
+                        <hr>
+                        <h3><strong>Chcę coś jeszcze zmienić!</strong></h3>
+                        <p>Jeśli chcesz coś jeszcze zmienić, ten przycisk zaprowadzi Cię do poprzedniej strony.</p>
+                        <hr>
+                        <h3><strong>Pobierz paczkę</strong></h3>
+                        <p>Jeśli jesteś zadowolony z tego, jak wygląda Twoje portfolio, pobierz paczkę, a następnie wróć do instrukcji
+                            aby dowiedzieć się, co z nią dalej zrobić.</p>
+                        <hr>
+                        <h3><strong>Zabierz mnie do instrukcji</strong></h3>
+                        <p>Ten przycisk zabierze Cię do instrukcji.</p>
+                    </div>
+                    <br><br>
+                    <h1 class="instructions-header" id="package">Paczka</h1>
+                    <div class="instructions-list">
+                        <h3><strong>Rozpakuj paczkę</strong></h3>
+                        <p></p>
+                        <hr>
+                    </div>
+
+                </div>
+           </div>
+       </div>
+        {% include 'scripts.html' %}
+    </body>
+</html>

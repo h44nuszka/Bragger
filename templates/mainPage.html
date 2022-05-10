@@ -35,7 +35,7 @@
 
                 {% for filename, name in filenamesNames: %}
                 <div class="img-overlay-container">
-                    <img class='img-fluid' src="{{ url_for('static', filename = 'yourTemplates/static/img/' + filename) }}">
+                    <img class='img-fluid' src="{{ url_for('static', filename = imageFolder +  '/' + filename) }}">
                     <div class="overlay" onclick="openModal();currentSlide(1)">
 
                     </div>

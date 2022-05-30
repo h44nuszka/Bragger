@@ -124,9 +124,10 @@
                         <h3><strong>Wrzucone pliki &mdash; konwencja nazewnicza</strong></h3>
                         <p>Wrzuć wszystkie swoje prace, które chcesz mieć w&nbsp;portfolio. Pamiętaj o&nbsp;zasadach wymienionych w punkcie <a href="#layout"><i>Układ strony</i></a>.
                             <br>Dzięki zachowanej konwencji nazewniczej można w łatwy sposób przekazać tytuły swoich prac. <br>
-                            Zasada jest tylko jedna: wstaw znak "_" pomiędzy słowa w tytule. Aplikacja rozdzieli słowa i pokaże sformatowany tytuł pracy.<br>
+                            Zasada jest tylko jedna: wstaw znak "_" lub "-" pomiędzy słowa w tytule. Aplikacja rozdzieli słowa i pokaże sformatowany tytuł pracy.<br>
                             <strong>Na przykład:</strong><br>
-                            Plik Mój_Tytuł.png będzie wyświetlał się jako Mój Tytuł.
+                            Plik Mój_Tytuł.png będzie wyświetlał się jako Mój Tytuł. <br>
+                            Plik Drugi-tytuł.jpg będzie wyświetlał się jako Drugi tytuł.
                         </p>
                         <hr>
                     </div>
@@ -150,12 +151,103 @@
                     </div>
                     <br><br>
                     <h1 class="instructions-header" id="package">Paczka</h1>
-                    <div class="instructions-list">
+                    <div class="instructions-list row">
                         <h3><strong>Rozpakuj paczkę</strong></h3>
-                        <p></p>
+                        <div class="col-md-6">
+                            <p>Po pobraniu pliku na komputer, rozpakuj plik yourTemplates.zip klikając "Wyodrębniij wszystkie" w menu,
+                            które pojawia się po kliknięciu prawym przyciskiem myszy na pobrany plik.
+                            Po rozpakowaniu, przenieś folder static do folderu o nazwie składającej się z
+                            kilku cyfr rozdzielonych kropką.
+                            Następnie, jeśli chcesz, możesz uruchomić w przeglądarce którąś ze stron z
+                            rozszerzeniem .html i zobaczyć,
+                            jak portfolio wygląda lokalnie.
+                            Strony powinny być gotowe do przekazania ich na serwer.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img class='img-fluid img-margin' src="static/img/snip1.png">
+                        </div>
+
                         <hr>
                     </div>
 
+                    <div class="instructions-list row">
+                        <h3><strong>Kupno domeny i hostingu</strong></h3>
+                        <div class="col-md-6">
+                            <p>Jeśli masz już domenę i hosting - pomiń ten krok.
+                            Jeśli jednak nie wiesz nawet za bardzo co to jest, czytaj uważnie!
+                            Domena to URL, główny link do Twojej strony.
+                                Hosting to miejsce na serwerze, które musisz kupić, aby móc pod
+                                swoją domeną zamieścić stronę.
+                                Ta instrukcja będzie bazować na działaniu sklepu home.pl,
+                                jednak jeśli czujesz się pewnie, możesz wybrać inny sklep.
+                                <br>
+                                Na stronie wyszukaj interesującą Cię nazwę i dodaj ją do koszyka. Po
+                                przejściu do koszyka, dobierz również hosting i certyfikat SSL.
+                            </p>
+                        </div>
+                            <div class="col-md-6">
+                            <img class='img-fluid img-margin' src="static/img/snip2.png">
+                        </div>
+                            <p>Po ukończeniu płatności odczekaj chwilę aż usługi się aktywują,
+                            a następnie uważnie prześledź kolejne instrukcje oferowane przez
+                            home.pl aby skonfigurować serwer.
+                            </p>
+                        <button class="instruction-button"><a class="button-link" target="_blank" href="https://pomoc.home.pl/baza-wiedzy/jak-przypisac-domene-do-hostingu-w-panelu-klienta">
+                            Przypisz domenę do hostingu
+                        </a></button>
+                        <button class="instruction-button"><a class="button-link" target="_blank" href="https://pomoc.home.pl/baza-wiedzy/jak-zalogowac-sie-do-poczty-home-pl">
+                            Zaloguj się do poczty home.pl
+                        </a></button>
+                        <button class="instruction-button"><a class="button-link" target="_blank" href="https://pomoc.home.pl/baza-wiedzy/aktywacja-oplaconego-certyfikatu-ssl-w-panelu-klienta ">
+                            Aktywuj certyfikat SSL
+                        </a></button>
+                        <hr>
+                    </div>
+                    <div class="instructions-list row">
+                        <h3><strong>Wrzucanie plików na serwer</strong></h3>
+                        <p>Aby przekazać pliki na serwer, użyj aplikacji WebFTP w panelu klienta</p>
+                            <button class="instruction-button"><a class="button-link" target="_blank" href="https://pomoc.home.pl/baza-wiedzy/jak-uruchomic-webftp-panelu-klienta">
+                            Uruchom WebFTP
+                        </a></button>
+                        <p>
+                            Wejdź do folderu public_html i usuń całą istniejącą zawartość. Następnie
+                            Otwórz lokalnie folder z zawartością portfolio i z menu po kliknięciu prawego
+                            przycisku myszy wybierz opcję "Skompresuj do pliku ZIP".
+                            Następnie wyślij ten plik na serwer klikając przycisk "WGRAJ".
+                        </p>
+                        <div class="col-md-6">
+                            <img class='img-fluid img-margin' src="static/img/snip3.png">
+                        </div>
+                        <div class="col-md-6">
+                            <img class='img-fluid img-margin' src="static/img/snip4.png">
+                        </div>
+                        <p>
+                            Kiedy uda się wrzucić plik ZIP na serwer, zaznacz go używając checkboxa
+                            po lewej stronie i wybierz opcję "Rozpakuj ZIP".
+                        </p>
+                        <img class='img-fluid img-margin' src="static/img/snip5.png">
+                        <p>
+                            Przejdź pod ścieżkę podobną do tej, którą widać na poniższym zrzucie ekranu
+                            Zaznacz wszystkie pliki i kliknij "Przenieś".
+                        </p>
+                        <img class='img-fluid img-margin' src="static/img/snip6.png">
+                        <p>
+                            Następnie kliknij na ikonkę pomiędzy ścieżką a przyciskiem "Ustaw dla wszystkich".
+                        </p>
+                        <img class='img-fluid img-margin' src="static/img/snip7.png">
+                        <p>
+                            Klikaj "Do góry", aż nie dojdziesz do głównego folderu na dysku. Następnie
+                            kliknij dwa razy "public_html" i zatwierdź przyciskiem "Wybierz".
+                            <br>
+                            Kliknij "USTAW DLA WSZYSTKICH", a następnie "PRZENIEŚ" na dole strony.
+                        </p>
+                        <div class="col-md-6">
+                            <img class='img-fluid img-margin' src="static/img/snip8.png">
+                        </div>
+                        <div class="col-md-6">
+                            <img class='img-fluid img-margin' src="static/img/snip9.png">
+                        </div>
+                    </div>
                 </div>
            </div>
        </div>

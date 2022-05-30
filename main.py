@@ -1,5 +1,7 @@
 import math
 import shutil
+import time
+import urllib.parse
 from io import BytesIO
 
 from flask import Flask, \
@@ -13,6 +15,8 @@ import os
 from flask_session.__init__ import Session
 from datetime import timedelta, datetime
 from zipfile import ZipFile
+
+from werkzeug.utils import secure_filename
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -43,8 +47,7 @@ def index():
 
 @app.route('/main')
 def main():
-    if session.get('DOWNLOAD_FOLDER') and os.path.exists(session['DOWNLOAD_FOLDER']):
-        deleteItems()
+    deleteItems()
     session['portfolioName'] = None
     session['backgroundColor'] = None
     session['fontColor'] = None
@@ -83,10 +86,10 @@ def dataForm():
     if request.method == 'POST':
         DT = datetime.now()
         TS = str(datetime.timestamp(DT))
-        UPLOAD_FOLDER = 'static/' + TS + '/static/img'
-        DOWNLOAD_FOLDER = 'static/' + TS
+        UPLOAD_FOLDER = 'static/templates/' + TS + '/static/img'
+        DOWNLOAD_FOLDER = 'static/templates/' + TS
         session['IMAGE_UPLOADS'] = UPLOAD_FOLDER
-        session['imageFolder'] = TS + '/static/img'
+        session['imageFolder'] ='templates/' + TS + '/static/img'
         session['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 
         session['portfolioName'] = request.form['portfolioName']
@@ -143,24 +146,24 @@ def dataForm():
 
 @app.route('/mainPage.html')
 def mainPage():
-    if not session.get("filenames"):
+    if not session.get("secure_filenames"):
         return redirect("/form")
-    return render_template('mainPage.html', imageFolder = session['imageFolder'], filenamesNames = zip(session['filenames'], session['names']), imageInAColumn=session['imageInAColumn'], images=session['filenames'], menuItems=session['menuItems'],menuElementsQty=session['menuElementsQty'], imageQty=session['imageQty'], columns=session['columns'], portfolioName=session['portfolioName'], language=session['language'], backgroundColor=session['backgroundColor'], fontColor=session['fontColor'])
+    return render_template('mainPage.html', imageFolder = session['imageFolder'], filenamesNames2 = zip(session['secure_filenames'],session['names']),filenamesNames = zip(session['secure_filenames'], session['names']), imageInAColumn=session['imageInAColumn'], menuItems=session['menuItems'],menuElementsQty=session['menuElementsQty'], imageQty=session['imageQty'], columns=session['columns'], portfolioName=session['portfolioName'], language=session['language'], backgroundColor=session['backgroundColor'], fontColor=session['fontColor'])
 
 
 @app.route('/secondPage.html')
 def secondPage():
-    return render_template('secondPage.html', menuItems=session['menuItems'], menuElementsQty=session['menuElementsQty'], backgroundColor=session['backgroundColor'], fontColor=session['fontColor'], language=session['language'], siteContent=session['siteContent'])
+    return render_template('secondPage.html', menuItems=session['menuItems'], menuElementsQty=session['menuElementsQty'], backgroundColor=session['backgroundColor'], fontColor=session['fontColor'], language=session['language'], siteContent=session['siteContent'], portfolioName=session['portfolioName'])
 
 
 @app.route('/thirdPage.html')
 def thirdPage():
-    return render_template('thirdPage.html', menuItems=session['menuItems'], menuElementsQty=session['menuElementsQty'], backgroundColor=session['backgroundColor'], fontColor=session['fontColor'], language=session['language'], siteContent=session['siteContent'])
+    return render_template('thirdPage.html', menuItems=session['menuItems'], menuElementsQty=session['menuElementsQty'], backgroundColor=session['backgroundColor'], fontColor=session['fontColor'], language=session['language'], siteContent=session['siteContent'], portfolioName=session['portfolioName'])
 
 
 @app.route('/fourthPage.html')
 def fourthPage():
-    return render_template('fourthPage.html', menuItems=session['menuItems'], menuElementsQty=session['menuElementsQty'], backgroundColor=session['backgroundColor'], fontColor=session['fontColor'], language=session['language'], siteContent=session['siteContent'])
+    return render_template('fourthPage.html', menuItems=session['menuItems'], menuElementsQty=session['menuElementsQty'], backgroundColor=session['backgroundColor'], fontColor=session['fontColor'], language=session['language'], siteContent=session['siteContent'], portfolioName=session['portfolioName'])
 
 
 @app.route('/end')
@@ -170,7 +173,10 @@ def end():
     """
     fileName = 'yourTemplates.zip'
 
+    if not session.get('DOWNLOAD_FOLDER'):
+        return redirect("/form")
     directory = session['DOWNLOAD_FOLDER']
+
     rootdir = os.path.basename(directory)
 
     directory_static = 'static/staticTemplates/static'
@@ -190,8 +196,8 @@ def end():
                 parentpath = os.path.relpath(filepath, directory_static)
                 arcname = os.path.join(rootdir_static, parentpath)
                 zf.write(filepath, arcname)
-
     memory_file.seek(0)
+    session.modified = True
     return send_file(memory_file, attachment_filename=fileName, as_attachment=True, cache_timeout=0)
 
 @app.route('/delete')
@@ -203,11 +209,12 @@ def delete():
 def createFilesList():
     """
     Save uploaded images.
-    session['filenames'] is a list of filenames.
+    session['secure_filenames'] is a list of filenames.
     session['names'] is a list of filenames formatted to names displayed on the template.
     """
-    session['filenames'] = []
+    filenames = []
     session['names'] = []
+    session['secure_filenames'] = []
     images = request.files.getlist('image')
     cwd = os.getcwd()
 
@@ -215,27 +222,42 @@ def createFilesList():
         os.makedirs(session['IMAGE_UPLOADS'])
 
     for image in images:
-        image.save(os.path.join(cwd, session['IMAGE_UPLOADS'], image.filename))
-        session['filenames'].append(image.filename)
+        image.save(os.path.join(cwd, session['IMAGE_UPLOADS'], secure_filename(image.filename)))
+        filenames.append(image.filename)
 
     session['imageQty'] = len(images)
 
-    for filename in session['filenames']:
+    for filename in filenames:
         name = filename.split('.', 1)
         session['names'].append(name[0])
+        session['secure_filenames'].append(secure_filename(filename))
 
     tmp = []
     for name in session['names']:
-        tmp.append(name.replace("_", " "))
+        tmp1 = name
+        if "_" in str(tmp1):
+            tmp1 = tmp1.replace("_", " ")
+        if "-" in str(tmp1):
+            tmp1 = tmp1.replace("-", " ")
+
+        tmp.append(tmp1)
 
     session['names'] = tmp
     session['names'].sort()
-    session['filenames'].sort()
+    session['secure_filenames'].sort()
     session.modified = True
 
 
 def deleteItems():
-    shutil.rmtree(session['DOWNLOAD_FOLDER'])
+    """
+    Directories created by users are deleted after one day
+    """
+    path = 'static/templates'
+    if os.path.exists(path):
+        for directory in os.listdir(path):
+            oldFolder = path + '/' + directory
+            if time.time() - float(str(directory)) > 86400:
+                shutil.rmtree(oldFolder)
 
 
 def appendMenuItemsAndContent():
@@ -258,24 +280,27 @@ def appendMenuItemsAndContent():
 def saveTemplate(pageName):
     name = pageName
     if pageName == 'mainPage.html':
-        pageTemplate = render_template('mainPage.html', imageFolder = session['imageFolder'], filenamesNames = zip(session['filenames'],
+        name = 'index.html'
+        pageTemplate = render_template('mainPage.html', imageFolder = session['imageFolder'], filenamesNames = zip(session['secure_filenames'],
+                                            session['names']), filenamesNames2 = zip(session['secure_filenames'],
                                             session['names']), imageInAColumn=session['imageInAColumn'],
-                                            images=session['filenames'], menuItems=session['menuItems'],
+                                            menuItems=session['menuItems'],
                                             menuElementsQty=session['menuElementsQty'], imageQty=session['imageQty'],
                                             columns=session['columns'], portfolioName=session['portfolioName'],
                                             language=session['language'], backgroundColor=session['backgroundColor'],
                                             fontColor=session['fontColor'])
 
-        pageTemplate = pageTemplate.replace("/static/staticTemplates/static/img", "static/img")
+        pageTemplate = pageTemplate.replace("/" + session['IMAGE_UPLOADS'], "static/img")
+        pageTemplate = pageTemplate.replace('<div class="row"><div class="preview"><p>This is a preview</p><p>To get the package please press the button</p><button class="button" onclick="history.back()">Chcę coś jeszcze zmienić!</button><a href="/end"><button class="button">Pobierz paczkę</button></a><a href="/delete"><button class="button">Zabierz mnie do instrukcji</button></a></div></div>', "")
     else:
         pageTemplate = render_template(name, menuItems=session['menuItems'],
                                              menuElementsQty=session['menuElementsQty'],
                                              backgroundColor=session['backgroundColor'], fontColor=session['fontColor'],
-                                             language=session['language'], siteContent=session['siteContent'])
+                                             language=session['language'], siteContent=session['siteContent'], portfolioName=session['portfolioName'])
 
-
+    pageTemplate = pageTemplate.replace('mainPage.html', 'index.html')
     path = session['DOWNLOAD_FOLDER'] + '/' + name
-    with open(path, 'w') as f:
+    with open(path, 'w', encoding='utf-8') as f:
         f.write(pageTemplate)
         f.close()
 
